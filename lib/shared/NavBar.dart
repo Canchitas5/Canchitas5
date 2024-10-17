@@ -6,11 +6,11 @@ class NavBar extends StatelessWidget {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.grade),
+          icon: Icon(Icons.home),
           label: 'Inicio',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.grade),
+          icon: Icon(Icons.sports_football),
           label: 'Canchitas',
         ),
         BottomNavigationBarItem(
@@ -36,7 +36,7 @@ class NavBar extends StatelessWidget {
     switch (route) {
       case '/':
         return 0;
-      case '/':
+      case '/playgrounds':
         return 1;
       case '/':
         return 2;
@@ -53,7 +53,7 @@ class NavBar extends StatelessWidget {
         Navigator.pushReplacementNamed(context, '/');
         break;
       case 1:
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushReplacementNamed(context, '/playgrounds');
         break;
       case 2:
         Navigator.pushReplacementNamed(context, '/');
