@@ -6,11 +6,11 @@ class NavBar extends StatelessWidget {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.grade),
           label: 'Inicio',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.sports_football),
+          icon: Icon(Icons.grade),
           label: 'Canchitas',
         ),
         BottomNavigationBarItem(
