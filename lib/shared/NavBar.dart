@@ -38,9 +38,9 @@ class NavBar extends StatelessWidget {
         return 0;
       case '/playgrounds':
         return 1;
-      case '/':
+      case '/someRouteForSlot3':
         return 2;
-      case '/':
+      case '/someRouteForSlot4':
         return 3;
       default:
         return 0;
@@ -50,16 +50,16 @@ class NavBar extends StatelessWidget {
   void _onItemTapped(int index, BuildContext context) {
     switch (index) {
       case 0:
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushNamed(context, '/');
         break;
       case 1:
-        Navigator.pushReplacementNamed(context, '/playgrounds');
+        Navigator.pushNamed(context, '/playgrounds');
         break;
       case 2:
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushNamed(context, '/someRouteForSlot3');
         break;
       case 3:
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushNamed(context, '/someRouteForSlot4');
         break;
     }
   }
