@@ -1,4 +1,3 @@
-import 'package:canchitas/screens/PlaygroundsScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,11 +16,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/playgrounds',
+      initialRoute: '/',
       routes: {
-        //'/': (context) => const LoginPage(),
+        '/': (context) => MyApp(),
         //'home': (context) => const HomeScreen(),
-        '/playgrounds': (context) => PlaygroundsScreen(),
+        //'/playgrounds': (context) => PlaygroundsScreen(),
         //'/reservations': (context) => const ReservationsScreen(),
         //'/profile': (context) => const ProfileScreen(),
       },

@@ -34,13 +34,13 @@ class NavBar extends StatelessWidget {
   int _getSelectedIndex(BuildContext context) {
     final route = ModalRoute.of(context)?.settings.name;
     switch (route) {
-      case '/home':
+      case '/':
         return 0;
-      case '/playgrounds':
+      case '/':
         return 1;
-      case '/grades':
+      case '/':
         return 2;
-      case '/profile':
+      case '/':
         return 3;
       default:
         return 0;
@@ -50,16 +50,16 @@ class NavBar extends StatelessWidget {
   void _onItemTapped(int index, BuildContext context) {
     switch (index) {
       case 0:
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, '/');
         break;
       case 1:
-        Navigator.pushReplacementNamed(context, '/playgrounds');
+        Navigator.pushReplacementNamed(context, '/');
         break;
       case 2:
-        Navigator.pushReplacementNamed(context, '/grades');
+        Navigator.pushReplacementNamed(context, '/');
         break;
       case 3:
-        Navigator.pushReplacementNamed(context, '/profile');
+        Navigator.pushReplacementNamed(context, '/');
         break;
     }
   }
