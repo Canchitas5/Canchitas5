@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/playgrounds',
       routes: {
-        '/': (context) => MyApp(),
+        //'/': (context) => MyApp(),
         //'home': (context) => const HomeScreen(),
         '/playgrounds': (context) => PlaygroundsScreen(),
         //'/reservations': (context) => const ReservationsScreen(),
