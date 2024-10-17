@@ -1,3 +1,4 @@
+import 'package:canchitas/screens/PlaygroundsScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MyApp(),
         //'home': (context) => const HomeScreen(),
-        //'/playgrounds': (context) => PlaygroundsScreen(),
+        '/playgrounds': (context) => PlaygroundsScreen(),
         //'/reservations': (context) => const ReservationsScreen(),
         //'/profile': (context) => const ProfileScreen(),
       },
