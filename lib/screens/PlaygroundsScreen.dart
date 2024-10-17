@@ -102,15 +102,49 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
   ];
 
   String searchQuery = '';
+  double startHour = 6.0;
+  double endHour = 23.0;
+
+  bool isWithinHours(String availableHours, double userStartHour, double userEndHour) {
+    final availableRange = availableHours.split(' - ');
+    final availableStart = _parseTime(availableRange[0]);
+    final availableEnd = _parseTime(availableRange[1]);
+
+    final availableStartMinutes = timeOfDayToMinutes(availableStart);
+    final availableEndMinutes = timeOfDayToMinutes(availableEnd);
+    final userStartMinutes = (userStartHour * 60).toInt();
+    final userEndMinutes = (userEndHour * 60).toInt();
+
+    return (userEndMinutes >= availableStartMinutes && userStartMinutes <= availableEndMinutes);
+  }
+
+  int timeOfDayToMinutes(TimeOfDay time) {
+    return time.hour * 60 + time.minute;
+  }
+
+  TimeOfDay _parseTime(String time) {
+    final format = time.contains('PM') && !time.contains('12') ? 12 : 0;
+    final timeParts = time.replaceAll(RegExp(r'[ AMPMam]'), '').split(':');
+    return TimeOfDay(
+        hour: int.parse(timeParts[0]) + format, minute: int.parse(timeParts[1]));
+  }
+
+  String formatHourLabel(double hour) {
+    int hours = hour.toInt();
+    String period = hours >= 12 ? 'PM' : 'AM';
+    hours = hours > 12 ? hours - 12 : hours;
+    return '${hours.toString().padLeft(2, '0')}:00 $period';
+  }
 
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> filteredPlaygrounds = playgrounds
         .where((playground) =>
-    playground['name'].toLowerCase().contains(searchQuery.toLowerCase()) ||
+    (playground['name'].toLowerCase().contains(searchQuery.toLowerCase()) ||
         playground['address'].toLowerCase().contains(searchQuery.toLowerCase()) ||
         playground['price'].toLowerCase().contains(searchQuery.toLowerCase()) ||
-        playground['sport'].toLowerCase().contains(searchQuery.toLowerCase()))
+        playground['sport'].toLowerCase().contains(searchQuery.toLowerCase())) &&
+        isWithinHours(playground['hours'], startHour, endHour))
         .toList();
 
     return Scaffold(
@@ -134,6 +168,32 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
               },
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Filtrar por horario de operación:', style: TextStyle(fontSize: 16)),
+                RangeSlider(
+                  values: RangeValues(startHour, endHour),
+                  min: 6.0,
+                  max: 23.0,
+                  divisions: 17, // Para representar las horas desde 6 AM hasta 11 PM
+                  labels: RangeLabels(formatHourLabel(startHour), formatHourLabel(endHour)),
+                  onChanged: (RangeValues values) {
+                    setState(() {
+                      startHour = values.start;
+                      endHour = values.end;
+                    });
+                  },
+                ),
+                Text(
+                  'Desde: ${formatHourLabel(startHour)} hasta ${formatHourLabel(endHour)}',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: filteredPlaygrounds.length,
@@ -141,7 +201,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
                 final playground = filteredPlaygrounds[index];
                 return GestureDetector(
                   onTap: () {
-                    // Acción cuando se selecciona una cancha
+                    // Acción al tocar un elemento de la lista
                   },
                   child: Card(
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
