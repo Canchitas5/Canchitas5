@@ -16,6 +16,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.5,
       'price': '\$20/hora',
       'address': 'Av. Siempre Viva 742',
+      'sport': 'Fútbol',
     },
     {
       'name': 'Campo El Reto',
@@ -24,6 +25,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.7,
       'price': '\$15/hora',
       'address': 'Calle Desafío 123',
+      'sport': 'Fútbol',
     },
     {
       'name': 'Fut 5 La Redonda',
@@ -32,6 +34,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.3,
       'price': '\$18/hora',
       'address': 'Plaza Fútbol 10',
+      'sport': 'Fútbol 5',
     },
     {
       'name': 'Arena Gol',
@@ -40,6 +43,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.8,
       'price': '\$22/hora',
       'address': 'Camino Playa 45',
+      'sport': 'Voleibol de Playa',
     },
     {
       'name': 'Estadio Pequeño',
@@ -48,6 +52,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.6,
       'price': '\$25/hora',
       'address': 'Calle del Estadio 1',
+      'sport': 'Fútbol',
     },
     {
       'name': 'Soccer City',
@@ -56,6 +61,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.4,
       'price': '\$19/hora',
       'address': 'Avenida Central 90',
+      'sport': 'Fútbol',
     },
     {
       'name': 'Futbolitos del Sur',
@@ -64,6 +70,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.9,
       'price': '\$23/hora',
       'address': 'Calle Sur 23',
+      'sport': 'Fútbol',
     },
     {
       'name': 'Playfut Central',
@@ -72,6 +79,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.2,
       'price': '\$21/hora',
       'address': 'Boulevard Central 77',
+      'sport': 'Fútbol',
     },
     {
       'name': 'Deportiva 7',
@@ -80,6 +88,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.1,
       'price': '\$16/hora',
       'address': 'Calle 7 Norte',
+      'sport': 'Básquetbol',
     },
     {
       'name': 'Cancha Estrella',
@@ -88,6 +97,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'rating': 4.5,
       'price': '\$20/hora',
       'address': 'Avenida Estrella 200',
+      'sport': 'Fútbol',
     },
   ];
 
@@ -99,7 +109,8 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
         .where((playground) =>
     playground['name'].toLowerCase().contains(searchQuery.toLowerCase()) ||
         playground['address'].toLowerCase().contains(searchQuery.toLowerCase()) ||
-        playground['price'].toLowerCase().contains(searchQuery.toLowerCase()))
+        playground['price'].toLowerCase().contains(searchQuery.toLowerCase()) ||
+        playground['sport'].toLowerCase().contains(searchQuery.toLowerCase()))
         .toList();
 
     return Scaffold(
@@ -112,7 +123,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: InputDecoration(
-                labelText: 'Buscar por nombre, dirección o precio',
+                labelText: 'Buscar por nombre, dirección, precio o deporte',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.search),
               ),
@@ -153,6 +164,8 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
                           Text(playground['description']),
                           SizedBox(height: 4),
                           Text('Dirección: ${playground['address']}'),
+                          SizedBox(height: 4),
+                          Text('Deporte: ${playground['sport']}'),
                           SizedBox(height: 4),
                           Row(
                             children: [
