@@ -15,6 +15,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Césped sintético de alta calidad.',
       'rating': 4.5,
       'price': '\$20/hora',
+      'address': 'Av. Siempre Viva 742',
     },
     {
       'name': 'Campo El Reto',
@@ -22,6 +23,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Espacio amplio con iluminación nocturna.',
       'rating': 4.7,
       'price': '\$15/hora',
+      'address': 'Calle Desafío 123',
     },
     {
       'name': 'Fut 5 La Redonda',
@@ -29,6 +31,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Cancha techada para fútbol 5.',
       'rating': 4.3,
       'price': '\$18/hora',
+      'address': 'Plaza Fútbol 10',
     },
     {
       'name': 'Arena Gol',
@@ -36,6 +39,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Arena blanca con excelente mantenimiento.',
       'rating': 4.8,
       'price': '\$22/hora',
+      'address': 'Camino Playa 45',
     },
     {
       'name': 'Estadio Pequeño',
@@ -43,6 +47,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Perfecto para partidos entre amigos.',
       'rating': 4.6,
       'price': '\$25/hora',
+      'address': 'Calle del Estadio 1',
     },
     {
       'name': 'Soccer City',
@@ -50,6 +55,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Ubicada en el centro de la ciudad.',
       'rating': 4.4,
       'price': '\$19/hora',
+      'address': 'Avenida Central 90',
     },
     {
       'name': 'Futbolitos del Sur',
@@ -57,6 +63,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Cancha al aire libre con grama natural.',
       'rating': 4.9,
       'price': '\$23/hora',
+      'address': 'Calle Sur 23',
     },
     {
       'name': 'Playfut Central',
@@ -64,6 +71,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Fútbol rápido con césped artificial.',
       'rating': 4.2,
       'price': '\$21/hora',
+      'address': 'Boulevard Central 77',
     },
     {
       'name': 'Deportiva 7',
@@ -71,6 +79,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Buena opción para equipos pequeños.',
       'rating': 4.1,
       'price': '\$16/hora',
+      'address': 'Calle 7 Norte',
     },
     {
       'name': 'Cancha Estrella',
@@ -78,6 +87,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       'description': 'Ideal para torneos locales.',
       'rating': 4.5,
       'price': '\$20/hora',
+      'address': 'Avenida Estrella 200',
     },
   ];
 
@@ -86,9 +96,10 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> filteredPlaygrounds = playgrounds
-        .where((playground) => playground['name']
-        .toLowerCase()
-        .contains(searchQuery.toLowerCase()))
+        .where((playground) =>
+    playground['name'].toLowerCase().contains(searchQuery.toLowerCase()) ||
+        playground['address'].toLowerCase().contains(searchQuery.toLowerCase()) ||
+        playground['price'].toLowerCase().contains(searchQuery.toLowerCase()))
         .toList();
 
     return Scaffold(
@@ -101,7 +112,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: InputDecoration(
-                labelText: 'Buscar canchita',
+                labelText: 'Buscar por nombre, dirección o precio',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.search),
               ),
@@ -119,7 +130,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
                 final playground = filteredPlaygrounds[index];
                 return GestureDetector(
                   onTap: () {
-
+                    // Acción cuando se selecciona una cancha
                   },
                   child: Card(
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -140,6 +151,8 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
                           Text('Horario: ${playground['hours']}'),
                           SizedBox(height: 4),
                           Text(playground['description']),
+                          SizedBox(height: 4),
+                          Text('Dirección: ${playground['address']}'),
                           SizedBox(height: 4),
                           Row(
                             children: [
