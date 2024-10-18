@@ -15,7 +15,7 @@ class _NavbarRootsState extends State<NavbarRoots> {
   int _selectedIndex = 0;
   final _screens = [
     const Homescreen(),
-    PlaygroundsScreen(),
+    const PlaygroundsScreen(),
     const ReservationsScreen(),
     const ProfileScreen(),
   ];
