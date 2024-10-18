@@ -86,11 +86,9 @@ class Homescreen extends StatelessWidget {
       items: [
         // Imagen de la cancha de fútbol
         'https://clublawntennis.net.pe/assets/img/Servicios/canchas-futbol.jpg',
-        // Añade más imágenes si es necesario
-        'https://clublawntennis.net.pe/assets/img/Servicios/canchas-futbol.jpg',
-        'https://clublawntennis.net.pe/assets/img/Servicios/canchas-futbol.jpg',
-        'https://clublawntennis.net.pe/assets/img/Servicios/canchas-futbol.jpg',
-        'https://clublawntennis.net.pe/assets/img/Servicios/canchas-futbol.jpg',
+        'https://www.uandes.cl/wp-content/uploads/2024/03/WhatsApp-Image-2024-02-26-at-13.02.25-1.jpeg',
+        'https://www.uandes.cl/wp-content/uploads/2019/05/MG_3618-e1557860511800.jpg',
+        'https://uandes.cl/wp-content/uploads/2019/05/MG_3545-e1557860730360.jpg',
       ].map((item) {
         return Builder(
           builder: (BuildContext context) {
