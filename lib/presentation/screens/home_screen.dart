@@ -64,6 +64,22 @@ class Homescreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: _buildCarousel(), // Otro carrusel de imágenes
             ),
+            const SizedBox(height: 30),
+
+            // Texto de llamada a la acción
+            const Spacer(),
+            const Center(
+              child: Text(
+                '¡Reserva tu cancha favorita y disfruta de momentos inolvidables con tus amigos!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
