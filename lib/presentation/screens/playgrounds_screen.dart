@@ -1,9 +1,10 @@
+import 'package:canchitas/presentation/screens/playgrounds_details_screen.dart';
 import 'package:flutter/material.dart';
+
 class PlaygroundsScreen extends StatefulWidget {
   const PlaygroundsScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _PlaygroundsScreenState createState() => _PlaygroundsScreenState();
 }
 
@@ -178,7 +179,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
                   values: RangeValues(startHour, endHour),
                   min: 6.0,
                   max: 23.0,
-                  divisions: 17, // Para representar las horas desde 6 AM hasta 11 PM
+                  divisions: 17,
                   labels: RangeLabels(formatHourLabel(startHour), formatHourLabel(endHour)),
                   onChanged: (RangeValues values) {
                     setState(() {
@@ -201,7 +202,12 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
                 final playground = filteredPlaygrounds[index];
                 return GestureDetector(
                   onTap: () {
-                    // Acción al tocar un elemento de la lista
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PlaygroundDetailScreen(playground: playground),
+                      ),
+                    );
                   },
                   child: Card(
                     margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
