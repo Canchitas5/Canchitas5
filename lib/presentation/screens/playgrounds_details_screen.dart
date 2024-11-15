@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:canchitas/presentation/screens/reservation_confirmation_screen.dart';
 
 class PlaygroundDetailScreen extends StatelessWidget {
   final Map<String, dynamic> playground;
@@ -41,7 +41,19 @@ class PlaygroundDetailScreen extends StatelessWidget {
             const Spacer(),
             ElevatedButton(
               onPressed: () {
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReservationConfirmationScreen(
+                      name: playground['name'],
+                      hours: playground['hours'],
+                      address: playground['address'],
+                      sport: playground['sport'],
+                      rating: playground['rating'].toString(),
+                      price: playground['price'],
+                    ),
+                  ),
+                );
               },
               child: const Text('Reservar'),
             ),

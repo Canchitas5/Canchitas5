@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:canchitas/presentation/screens/reservations_screen.dart';
 
 class Homescreen extends StatelessWidget {
   const Homescreen({super.key});
@@ -17,7 +18,7 @@ class Homescreen extends StatelessWidget {
           children: [
             // Reservas Activas
             Text(
-              'reservas activas',
+              'Reservas Activas',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -38,7 +39,7 @@ class Homescreen extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'historial de reservas',
+                  'Historial de Reservas',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -46,12 +47,22 @@ class Homescreen extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                const Text(
-                  '>>>',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                InkWell(
+                  onTap: () {
+                    // Navega a ReservationsScreen cuando se hace clic en el texto
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ReservationsScreen()),
+                    );
+                  },
+                  child: const Text(
+                    '>>>',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
                   ),
                 ),
               ],
