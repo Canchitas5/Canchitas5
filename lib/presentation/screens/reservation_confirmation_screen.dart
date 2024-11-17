@@ -7,7 +7,7 @@ class ReservationConfirmationScreen extends StatefulWidget {
   final String address;
   final String sport;
   final String rating;
-  final String price;
+  final double price;
 
   const ReservationConfirmationScreen({
     super.key,
