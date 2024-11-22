@@ -1,7 +1,6 @@
 import 'package:canchitas/presentation/screens/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:canchitas/services/api_service.dart';
-import 'package:canchitas/presentation/screens/playgrounds_screen.dart'; 
 
 class LoginScreen extends StatefulWidget {
   final Map<String, dynamic> reservationDetails;
@@ -17,8 +16,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final ApiService _apiService = ApiService(); // Instancia del ApiService
-
   bool _isLoading = false;
+  bool _obscurePassword = true; // Estado para controlar la visibilidad de la contraseña
 
   void _login() async {
     setState(() {
@@ -40,23 +39,16 @@ class _LoginScreenState extends State<LoginScreen> {
       final response = await _apiService.loginUser(email, password, "person");
 
       if (response is List && response.isNotEmpty) {
-        // Inicio de sesión exitoso, redirige a PlaygroundsScreen
-        Navigator.pushReplacement(
-          // ignore: use_build_context_synchronously
-          context,
-          MaterialPageRoute(
-            builder: (context) => const PlaygroundsScreen(),
-          ),
-        );
-      } else if (response is Map && response.isNotEmpty) {
-        // Inicio de sesión exitoso, redirige a PlaygroundsScreen
-        Navigator.pushReplacement(
-          // ignore: use_build_context_synchronously
-          context,
-          MaterialPageRoute(
-            builder: (context) => const PlaygroundsScreen(),
-          ),
-        );
+        // Simulación de datos del usuario
+        final userData = {
+          'name': 'Mario Salvatierra',
+          'phone': '987654321',
+          'address': 'Av. Las Flores 123',
+        };
+
+        // Retornar los datos del usuario al `NavbarRoots`
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context, userData);
       } else {
         _showErrorDialog("Credenciales incorrectas o respuesta vacía.");
       }
@@ -126,13 +118,26 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
               TextField(
                 controller: _passwordController,
-                obscureText: true,
+                obscureText: _obscurePassword,
                 decoration: InputDecoration(
                   labelText: "Contraseña",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   prefixIcon: Icon(Icons.lock, color: Colors.green[700]),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: Colors.green[700],
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
