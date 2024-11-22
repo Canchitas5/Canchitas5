@@ -46,7 +46,7 @@ class PlaygroundDetailScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  const LoginScreen(), // Redirige al LoginScreen
+                    builder: (context) =>   const LoginScreen(reservationDetails: {},), // Redirige al LoginScreen
                   ),
                 );
               },
