@@ -2,17 +2,31 @@ import 'package:canchitas/presentation/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final String userName;
+  final String userPhone;
+  final String userAddress;
+
+  const ProfileScreen({
+    super.key,
+    required this.userName,
+    required this.userPhone,
+    required this.userAddress,
+  });
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
 }
 
 class ProfileScreenState extends State<ProfileScreen> {
-  bool isLoggedIn = false; // Cambia este valor según el estado del usuario
-  String? userName;
-  String? userPhone;
-  String? userAddress;
+  void _logout() {
+    // Navegar a la pantalla de login al cerrar sesión
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(reservationDetails: {}),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +39,16 @@ class ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(color: Colors.teal),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.red),
+            onPressed: _logout,
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: isLoggedIn
-            ? _buildProfileContent() // Contenido para usuarios logueados
-            : _buildLoginButton(), // Botón de iniciar sesión
+        child: _buildProfileContent(),
       ),
     );
   }
@@ -44,18 +62,17 @@ class ProfileScreenState extends State<ProfileScreen> {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.grey[300],
-              child: Icon(Icons.person, color: Colors.grey[700]),
+              child: const Icon(Icons.person, color: Colors.teal),
             ),
             title: Text(
-              userName ?? 'Usuario',
+              widget.userName,
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.teal),
             ),
-            subtitle: Text(
-                '${userAddress ?? "Sin dirección"}\n${userPhone ?? "Sin teléfono"}'),
+            subtitle: Text('${widget.userAddress}\n${widget.userPhone}'),
             trailing: ElevatedButton(
               onPressed: () {
-                // Agregar funcionalidad para editar
+                // Implementar funcionalidad de editar
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
@@ -71,7 +88,7 @@ class ProfileScreenState extends State<ProfileScreen> {
             TextButton(
               onPressed: () {
                 setState(() {
-                  // Cambia entre reservas activas y anteriores
+                  // Implementar lógica para mostrar reservas activas
                 });
               },
               child: const Text(
@@ -86,7 +103,7 @@ class ProfileScreenState extends State<ProfileScreen> {
             TextButton(
               onPressed: () {
                 setState(() {
-                  // Cambia entre reservas activas y anteriores
+                  // Implementar lógica para mostrar reservas anteriores
                 });
               },
               child: const Text(
@@ -103,40 +120,6 @@ class ProfileScreenState extends State<ProfileScreen> {
         const Divider(),
         const ReservationCard(),
       ],
-    );
-  }
-
-  Widget _buildLoginButton() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'No has iniciado sesión.',
-            style: TextStyle(fontSize: 18, color: Colors.grey),
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              // Navegar a la pantalla de login
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        const LoginScreen(reservationDetails: {})),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.teal,
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-            ),
-            child: const Text(
-              'Iniciar Sesión',
-              style: TextStyle(fontSize: 16, color: Colors.white),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
