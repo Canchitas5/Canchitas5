@@ -20,6 +20,7 @@ class ReservationConfirmationScreen extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _ReservationConfirmationScreenState createState() =>
       _ReservationConfirmationScreenState();
 }
@@ -34,7 +35,7 @@ class _ReservationConfirmationScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Confirmar Reserva'),
+        title: const Text('Confirmar Reserva'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
