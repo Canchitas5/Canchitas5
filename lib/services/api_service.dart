@@ -94,7 +94,7 @@ class ApiService {
       body: jsonEncode({
         "email": email,
         "password": password,
-        "typeUser": typeUser,
+        "typeUser": 'person',
         "name": name,
         "lastName": lastName,
         "dni": dni,
