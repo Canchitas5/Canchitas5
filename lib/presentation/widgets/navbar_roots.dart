@@ -17,7 +17,7 @@ class _NavbarRootsState extends State<NavbarRoots> {
     const Homescreen(),
     const PlaygroundsScreen(),
     const ReservationsScreen(),
-    const ProfileScreen(),
+    const ProfileScreen(userName: '', userPhone: '', userAddress: '',),
   ];
 
   @override
