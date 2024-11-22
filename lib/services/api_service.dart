@@ -84,7 +84,7 @@ class ApiService {
   required String picProfile,
 }) async {
   try {
-    final Uri uri = Uri.parse('$baseUrl/person');
+    final Uri uri = Uri.parse('$baseUrl/Person');
 
     final response = await http.post(
       uri,
