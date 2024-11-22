@@ -1,4 +1,3 @@
-import '../models/person.dart';
 import '../models/sport_place.dart';
 import '../models/reservation.dart';
 import 'package:http/http.dart' as http;
@@ -39,4 +38,83 @@ class ApiService {
       throw Exception('Error: $e');
     }
   }
+
+  // Método para realizar el login
+  Future<dynamic> loginUser(
+      String email, String password, String typeUser) async {
+    try {
+      final Uri uri = Uri.parse('$baseUrl/user').replace(queryParameters: {
+        'email': email,
+        'password': password,
+        'typeUser': typeUser,
+      });
+
+      final response = await http.get(uri);
+
+      if (response.statusCode == 200) {
+        // Verificar si la respuesta es una lista o un mapa
+        final dynamic data = jsonDecode(response.body);
+        if (data is List) {
+          return data; // Devuelve la lista si es el caso
+        } else if (data is Map) {
+          return data; // Devuelve el mapa si es el caso
+        } else {
+          throw Exception("Formato de respuesta no reconocido");
+        }
+      } else if (response.statusCode == 401) {
+        throw Exception('Credenciales incorrectas');
+      } else {
+        throw Exception('Failed to log in: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
+  // Método para realizar uN registro
+  Future<Map<String, dynamic>> registerUser({
+  required String email,
+  required String password,
+  required String typeUser,
+  required String name,
+  required String lastName,
+  required String dni,
+  required String phone,
+  required String birthDate,
+  required String picProfile,
+}) async {
+  try {
+    final Uri uri = Uri.parse('$baseUrl/person');
+
+    final response = await http.post(
+      uri,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        "email": email,
+        "password": password,
+        "typeUser": typeUser,
+        "name": name,
+        "lastName": lastName,
+        "dni": dni,
+        "phone": phone,
+        "birthDate": birthDate,
+        "picProfile": picProfile,
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      // Registro exitoso
+      return jsonDecode(response.body);
+    } else if (response.statusCode == 400) {
+      throw Exception('Datos inválidos. Verifica los campos.');
+    } else {
+      throw Exception('Error al registrar: ${response.statusCode}');
+    }
+  } catch (e) {
+    throw Exception('Error: $e');
+  }
+}
+
 }
