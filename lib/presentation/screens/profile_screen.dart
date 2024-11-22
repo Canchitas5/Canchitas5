@@ -4,6 +4,7 @@ class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
@@ -106,6 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class ReservationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -119,8 +121,8 @@ class ReservationCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: const Text(
+                const Expanded(
+                  child: Text(
                     'RESERVA: #3835 - 28 de Julio del 2023\nPRUEBA 512 MIGUEL - Futbol',
                     style: TextStyle(fontWeight: FontWeight.bold),
                     softWrap: true,

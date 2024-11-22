@@ -7,6 +7,7 @@ class PlaygroundsScreen extends StatefulWidget {
   const PlaygroundsScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _PlaygroundsScreenState createState() => _PlaygroundsScreenState();
 }
 
@@ -32,6 +33,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
       });
     } catch (e) {
       // Manejo de errores, por ejemplo, mostrar un mensaje en pantalla
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
