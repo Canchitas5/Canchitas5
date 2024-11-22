@@ -1,7 +1,7 @@
 import 'package:canchitas/presentation/screens/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:canchitas/services/api_service.dart';
-import 'package:canchitas/presentation/screens/reservation_confirmation_screen.dart';
+import 'package:canchitas/presentation/screens/playgrounds_screen.dart'; 
 
 class LoginScreen extends StatefulWidget {
   final Map<String, dynamic> reservationDetails;
@@ -40,37 +40,21 @@ class _LoginScreenState extends State<LoginScreen> {
       final response = await _apiService.loginUser(email, password, "person");
 
       if (response is List && response.isNotEmpty) {
-        // Inicio de sesión exitoso, redirige a la pantalla de reserva
-        Navigator.push(
+        // Inicio de sesión exitoso, redirige a PlaygroundsScreen
+        Navigator.pushReplacement(
           // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(
-            builder: (context) => const LoginScreen(
-              reservationDetails: {
-                'name': 'Cancha de Fútbol',
-                'hours': "9:00 AM - 9:00 PM",
-                'address': 'Calle Los Pinos 123',
-                'sport': 'Fútbol',
-                'rating': '4.5',
-                'price': 50.0,
-              },
-            ),
+            builder: (context) => const PlaygroundsScreen(),
           ),
         );
       } else if (response is Map && response.isNotEmpty) {
-        // Inicio de sesión exitoso, redirige a la pantalla de reserva
-        Navigator.push(
+        // Inicio de sesión exitoso, redirige a PlaygroundsScreen
+        Navigator.pushReplacement(
           // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(
-            builder: (context) => ReservationConfirmationScreen(
-              name: widget.reservationDetails['name'],
-              hours: widget.reservationDetails['hours'],
-              address: widget.reservationDetails['address'],
-              sport: widget.reservationDetails['sport'],
-              rating: widget.reservationDetails['rating'],
-              price: widget.reservationDetails['price'],
-            ),
+            builder: (context) => const PlaygroundsScreen(),
           ),
         );
       } else {
