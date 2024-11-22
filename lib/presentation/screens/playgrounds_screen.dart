@@ -19,11 +19,14 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
   double startHour = 6.0; // Hora de inicio para el filtro
   double endHour = 23.0; // Hora de fin para el filtro
 
+  bool isUserLoggedIn = false; // Define si el usuario está logueado
+
   @override
   void initState() {
     super.initState();
     apiService = ApiService();
     fetchSportPlaces();
+    isUserLoggedIn = true; // Cambia según tu lógica real
   }
 
   Future<void> fetchSportPlaces() async {
@@ -154,7 +157,7 @@ class _PlaygroundsScreenState extends State<PlaygroundsScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => PlaygroundDetailScreen(
-                                  playground: playground),
+                                  playground: playground, isLoggedIn: isUserLoggedIn,),
                             ),
                           );
                         },
